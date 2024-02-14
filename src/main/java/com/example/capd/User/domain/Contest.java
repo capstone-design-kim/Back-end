@@ -3,37 +3,53 @@ package com.example.capd.User.domain;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
+@Entity(name = "contest")
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-//테스트용
+@Builder
+@AllArgsConstructor
 public class Contest {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 200)
     private String title;
 
-    //참여할게요 매핑
-    @OneToMany(mappedBy = "contest")
-    private List<Participation> participations = new ArrayList<>();
+    @Column(length = 200)
+    private String host;
 
-    //유저 매핑
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @Column(length = 200)
+    private String targetParticipants;
 
-    // 팀 매핑
-    @OneToMany(mappedBy = "contest")
-    private List<Team> teams = new ArrayList<>();
+    @Column(length = 40)
+    private String receptionPeriod;
 
+    @Column(length = 40)
+    private String decisionPeriod;
 
+    @Column(length = 200)
+    private String compatitionArea;
+
+    @Column(length = 200)
+    private String award;
+    @Column(length = 300)
+    private String homepage;
+
+    @Column(length = 20)
+    private String howToApply;
+
+    @Column(length = 20)
+    private String fee;
+
+    @Column(length = 400)
+    private String image;
+
+    @Column(length = 2000)
+    private String detailText;
 }
