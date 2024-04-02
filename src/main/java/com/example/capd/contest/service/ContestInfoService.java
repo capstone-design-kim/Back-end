@@ -26,4 +26,9 @@ public class ContestInfoService {
     public List<Long> getContestId(){
         return contestRepository.findAllIds();
     }
+
+    // 공모전 id로 해당 공모전 정보 반환
+    public Contest findContestDetailById(Long id) {
+        return contestRepository.findByIdWithQuery(id);
+    }
 }
