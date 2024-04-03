@@ -5,12 +5,9 @@ import com.example.capd.contest.service.ContestInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -48,6 +45,21 @@ public class ContestInfoController {
         }
         else {
             return new ResponseEntity<>(contest, HttpStatus.OK);
+        }
+    }
+
+    @PostMapping("/viewPlus")
+    public ResponseEntity<String> increaseViewCount(@RequestBody Map<String, Long> viewsIncreaseRequest) {
+        Long contestId = viewsIncreaseRequest.get("contestId");
+        Long addedViews = viewsIncreaseRequest.get("addedViews");
+
+        Contest contest = contestInfoService.findContestDetailById(contestId);
+        if (contest == null) {
+            return new ResponseEntity<>("Contest not found", HttpStatus.NOT_FOUND);
+        } else {
+            contest.setViews(addedViews);
+            contestInfoService.saveContest(contest);
+            return new ResponseEntity<>("View count increased successfully", HttpStatus.OK);
         }
     }
 }

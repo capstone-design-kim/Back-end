@@ -31,4 +31,9 @@ public class ContestInfoService {
     public Contest findContestDetailById(Long id) {
         return contestRepository.findByIdWithQuery(id);
     }
+
+    // 업데이트된 공모전 정보 저장 (예: 조회수증가)
+    public Contest saveContest(Contest contest) {
+        return contestRepository.save(contest);
+    }
 }
