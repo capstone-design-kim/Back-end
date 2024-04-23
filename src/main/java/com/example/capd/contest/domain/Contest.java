@@ -55,6 +55,9 @@ public class Contest {
     @Column(length = 10000)
     private String detailText;
 
+    @Column
+    private int views;
+
     //참여할게요 매핑
     @OneToMany(mappedBy = "contest")
     private List<Participation> participations = new ArrayList<>();
