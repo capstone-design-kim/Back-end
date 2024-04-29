@@ -62,7 +62,7 @@ public class UserController {
     @PostMapping("/idCheck")
     public ResponseEntity<CommonResponse> checkUserId(@RequestBody UserIdRequest request) {
         String userId = request.getUserId();
-        Optional<User> userOptional = userRepository.findFirstByUserId(userId);
+        Optional<User> userOptional = userRepository.findByUserId(userId);
         CommonResponse res;
         if (userOptional.isPresent()) {
             res = new CommonResponse(400, HttpStatus.BAD_REQUEST, "아이디가 이미 존재합니다.", null);
